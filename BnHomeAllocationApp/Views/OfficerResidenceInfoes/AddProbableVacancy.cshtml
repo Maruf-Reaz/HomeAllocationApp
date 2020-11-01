@@ -1,0 +1,124 @@
+﻿@model BnHomeAllocationApp.Models.OfficerResidenceInfo
+
+@{
+    ViewData["Title"] = "Probable Vacancy";
+}
+
+@section Css {
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/select2/dist/css/select2.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/fonts/roboto-condensed/css.css">
+}
+
+@section Sole {
+    <style>
+        .card-body .input-group-text {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da !important;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #525f7f;
+            width: 160px;
+        }
+
+        .custom-file-label::after {
+            background-color: #e9ecef;
+            border-color: #ced4da !important;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #525f7f;
+        }
+
+        .select2.select2-container {
+            width: calc(100% - 160px) !important;
+        }
+    </style>
+}
+
+<div class="header bg-custom pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 d-inline-block mb-0">Create</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="Index">Probable Vacancy</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a class="btn btn-sm btn-neutral" asp-action="AllottementState">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="card mb-4 animated fadeIn">
+        <div class="card-header">
+            <h3 class="mb-0">Add Probable Vacancy</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="AddProbableVacancy">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <table class="table align-items-center table-hover table-striped table-bordered mb-2" id="datatable-basic2">
+                    <tr>
+                        <td colspan="1">
+                            <label class="mb-0">Officer Name :</label>
+                        </td>
+                        <td colspan="3">
+                            <input asp-for="Id" id="id" hidden class="form-control" value="@ViewBag.OfficerResidenceInfo.Id" />
+                            <input asp-for="OfficerId" id="id" hidden class="form-control" value="@ViewBag.OfficerResidenceInfo.OfficerId" />
+                            <input asp-for="ResidenceId" id="residenceId" hidden class="form-control" value="@ViewBag.OfficerResidenceInfo.ResidenceId" />
+                            <input asp-for="ApplicationTypeId" hidden class="form-control" value="@ViewBag.OfficerResidenceInfo.ApplicationTypeId" />
+                            <label class="mb-0 font-weight-bold">@ViewBag.OfficerResidenceInfo.Officer.OfficerRank.Name @ViewBag.OfficerResidenceInfo.Officer.Name</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1">
+                            <label class="mb-0">Current Residence :</label>
+                        </td>
+                        <td colspan="3">
+                            <label class="mb-0 font-weight-bold">@ViewBag.OfficerResidenceInfo.Residence.Name</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="1">
+                            <label class="mb-0">Allottement Date :</label>
+                        </td>
+                        <td colspan="1">
+                            <label class="mb-0 font-weight-bold">@ViewBag.OfficerResidenceInfo.AllottementDate</label>
+                        </td>
+                        <td colspan="1">
+                            <label class="mb-0">Probable Vacancy Date :</label>
+                        </td>
+                        <td colspan="1" class="p-0">
+                            <input asp-for="ProbableVacancyDate" class="form-control border-radius-0 border-0 datepicker" value="" />
+                        </td>
+                    </tr>
+                </table>
+                <div class="form-group mb-2">
+                    <label asp-for="VacancyReason" class="control-label">Vacancy Reason</label>
+                    <textarea asp-for="VacancyReason" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="VacancyReason" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Remarks" class="control-label"></label>
+                    <textarea asp-for="Remarks" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-1">
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script asp-append-version="true" src="~/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

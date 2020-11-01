@@ -1,0 +1,141 @@
+﻿@model BnHomeAllocationApp.Models.Officer
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section Css {
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/select2/dist/css/select2.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/fonts/roboto-condensed/css.css">
+}
+
+@section Sole {
+    <style>
+        .card-body .input-group-text {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da !important;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #525f7f;
+            width: 160px;
+        }
+
+        .custom-file-label::after {
+            background-color: #e9ecef;
+            border-color: #ced4da !important;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #525f7f;
+        }
+
+        .select2.select2-container {
+            width: calc(100% - 160px) !important;
+        }
+    </style>
+}
+
+<div class="header bg-custom pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 d-inline-block mb-0">Create</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="Index">Officers</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a class="btn btn-sm btn-neutral" asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="card mb-4 animated fadeIn">
+        <div class="card-header">
+            <h3 class="mb-0">Add New Officer</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Officer Name :</div>
+                            </div>
+                            <input asp-for="Name" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Officer Rank :</div>
+                            </div>
+                            <select data-toggle="select" asp-for="OfficerRankId" class="form-control" asp-items="ViewBag.OfficerRankId"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">P. No. :</div>
+                            </div>
+                            <input asp-for="PNO" class="form-control" />
+                        </div>
+                        <span asp-validation-for="PNO" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Commission Date :</div>
+                            </div>
+                            <input asp-for="CommissionDate" class="form-control datepicker" />
+                        </div>
+                        <span asp-validation-for="CommissionDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Current Workplace :</div>
+                            </div>
+                            <input asp-for="CurrentWorkPlace" class="form-control" />
+                        </div>
+                        <span asp-validation-for="CurrentWorkPlace" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Mobile Number :</div>
+                            </div>
+                            <input asp-for="MobileNumber" class="form-control" />
+                        </div>
+                        <span asp-validation-for="MobileNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Number Of Children :</div>
+                            </div>
+                            <input asp-for="NumberOfChildren" class="form-control" />
+                        </div>
+                        <span asp-validation-for="NumberOfChildren" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="submit" value="Create" class="btn btn-primary mt-3" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script asp-append-version="true" src="~/vendor/select2/dist/js/select2.min.js"></script>
+    <script asp-append-version="true" src="~/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

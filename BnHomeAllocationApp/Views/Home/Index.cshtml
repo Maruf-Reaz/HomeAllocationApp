@@ -1,0 +1,244 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@section Css {
+    <link asp-append-version="true" href='~/vendor/fullcalendar-2.2.7-yearview/fullcalendar.css' rel='stylesheet' />
+}
+
+@section sole {
+    <style>
+        #home-setup .card-stats .card-body p {
+            font-weight: 400;
+        }
+        .fc-toolbar {
+            display: none;
+        }
+
+        .fc-unthemed td.fc-today.fc-day-number {
+            background: linear-gradient(45deg, #303f9f, #7b1fa2);
+            box-shadow: 0 0 5px 0 rgba(123, 31, 162, .5);
+            color: #fff;
+        }
+    </style>
+}
+
+<div class="header bg-custom pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 d-inline-block mb-0">Home</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Home</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--5" id="home-setup">
+    <div class="row">
+        <div class="col-xl-12 order-xl-1">
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats bg-gradient-danger">
+                        <a href="#!">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-white mb-0">Total officer</h5>
+                                        <span class="h2 font-weight-bold mb-0">0</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-white text-default rounded-circle shadow">
+                                            <i class="fa fa-user-shield"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm">
+                                    <span class="text-white mr-2"><i class="fa fa-check"></i></span>
+                                    <span class="text-white">Since 2018</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats bg-gradient-orange">
+                        <a href="#!">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-white mb-0">Total building</h5>
+                                        <span class="h2 font-weight-bold mb-0">0</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-white text-default rounded-circle shadow">
+                                            <i class="fa fa-building"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm">
+                                    <span class="text-white mr-2"><i class="fa fa-check"></i></span>
+                                    <span class="text-white">In Chittagong</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats bg-gradient-success">
+                        <a href="#!">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-white mb-0">Total residence</h5>
+                                        <span class="h2 font-weight-bold mb-0">0</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-white text-default rounded-circle shadow">
+                                            <i class="fa fa-home"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm">
+                                    <span class="text-white mr-2"><i class="fa fa-check"></i></span>
+                                    <span class="text-white">In Dhaka</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-stats bg-gradient-info">
+                        <a href="#!">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title text-uppercase text-white mb-0">Total zone</h5>
+                                        <span class="h2 font-weight-bold mb-0">0</span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-white text-default rounded-circle shadow">
+                                            <i class="fa fa-grip-horizontal"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="mt-3 mb-0 text-sm">
+                                    <span class="text-white mr-2"><i class="fa fa-check"></i></span>
+                                    <span class="text-white">Countrywide</span>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt--4">
+    <div class="header pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6">
+                        <h6 class="fullcalendar-title h2 d-inline-block mb-0"></h6>
+                        <nav aria-label="breadcrumb" class="d-none d-lg-inline-block ml-lg-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Calendar</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 mt-3 mt-lg-0 text-lg-right">
+                        <a href="#" class="fullcalendar-btn-prev btn btn-sm btn-neutral">
+                            <i class="fas fa-angle-left"></i>
+                        </a>
+                        <a href="#" class="fullcalendar-btn-next btn btn-sm btn-neutral">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-neutral fullcalendar-btn-today">Today</a>
+                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="year">Year</a>
+                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="month">Month</a>
+                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="basicWeek">Week</a>
+                        <a href="#" class="btn btn-sm btn-neutral" data-calendar-view="basicDay">Day</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card card-calendar animated fadeIn">
+                    <div class="card-header">
+                        <h5 class="h3 mb-0">Calendar</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div data-toggle="calendar2" class="calendar" id="calendar2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script asp-append-version="true" src="/vendor/moment/min/moment.min.js"></script>
+    <script asp-append-version="true" src='/vendor/fullcalendar-2.2.7-yearview/fullcalendar.min.js'></script>
+    <script>
+        $(document).ready(function () {
+            var Fullcalendar = function () {
+                var e, a, t = $('[data-toggle="calendar2"]');
+                t.length && (a = {
+                    header: {
+                        right: "",
+                        center: "",
+                        left: ""
+                    },
+                    buttonIcons: {
+                        prev: "calendar--pre",
+                        next: "calendar--next"
+                    },
+                    theme: !1,
+                    selectable: !0,
+                    selectHelper: !0,
+                    editable: !1,
+                    viewRender: function (a) {
+                        e.fullCalendar("getDate").month(), $(".fullcalendar-title").html(a.title)
+                    },
+                },
+                    (e = t).fullCalendar(a),
+                    //Calendar Settings
+                    $("body").on("click", "[data-calendar-view]", function (a) {
+                        a.preventDefault(), $("[data-calendar-view]").removeClass("active"),
+                            $(this).addClass("active");
+                        var t = $(this).attr("data-calendar-view");
+                        e.fullCalendar("changeView", t)
+                    }),
+                    $("body").on("click", ".fullcalendar-btn-next", function (a) {
+                        a.preventDefault(), e.fullCalendar("next")
+                    }),
+                    $("body").on("click", ".fullcalendar-btn-prev", function (a) {
+                        a.preventDefault(), e.fullCalendar("prev")
+                    }),
+                    $("body").on("click", ".fullcalendar-btn-today", function (a) {
+                        a.preventDefault(), e.fullCalendar("today")
+                    }))
+            }();
+        });
+    </script>
+}
+

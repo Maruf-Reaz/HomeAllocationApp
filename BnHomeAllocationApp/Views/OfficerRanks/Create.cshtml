@@ -1,0 +1,91 @@
+﻿@model BnHomeAllocationApp.Models.OfficerRank
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section Css {
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/select2/dist/css/select2.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/fonts/roboto-condensed/css.css">
+}
+
+@section Sole {
+    <style>
+        .card-body .input-group-text {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da !important;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #525f7f;
+            width: 100px;
+        }
+
+        .custom-file-label::after {
+            background-color: #e9ecef;
+            border-color: #ced4da !important;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #525f7f;
+        }
+    </style>
+}
+
+<div class="header bg-custom pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 d-inline-block mb-0">Create</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="Index">Officer Ranks</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a class="btn btn-sm btn-neutral" asp-action="Index">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="card mb-4 animated fadeIn">
+        <div class="card-header">
+            <h3 class="mb-0">Add New Officer Rank</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Name :</div>
+                            </div>
+                            <input asp-for="Name" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Rank Point :</div>
+                            </div>
+                            <input asp-for="RankPoint" class="form-control" />
+                        </div>
+                        <span asp-validation-for="RankPoint" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="submit" value="Create" class="btn btn-primary mt-3" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - BnHomeAllocationApp</title>
+
+    <link asp-append-version="true" rel="icon" type="image/png" href="~/img/favicon/index.png">
+
+    <style type="text/css">
+        body {
+            background: url("/img/texture/6.png") fixed repeat;
+            color: #000;
+        }
+
+        .navbar-vertical.navbar-dark {
+            border-color: rgba(255, 255, 255, .1);
+            background-color: #172b4d;
+        }
+
+        nav#sidenav-main {
+            overflow-x: hidden !important;
+            overflow-y: hidden !important;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .active-sidebar.g-sidenav-pinned .sidenav.d-block.d-lg-none {
+            transform: translateX(-62px);
+            max-width: 0px !important;
+        }
+
+        .active-sidebar.g-sidenav-show.g-sidenav-pinned .sidenav.d-block.d-lg-none {
+            transform: translateX(0);
+            max-width: 250px !important;
+        }
+
+        .navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-brand > img {
+            max-width: 175px !important;
+            max-height: unset !important;
+        }
+
+        .sidenav .navbar-brand {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        @@media (max-width:975px) {
+            nav.navbar-top .sidenav-toggler-inner {
+                padding-right: 25px;
+                padding-left: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+
+    <link asp-append-version="true" rel="stylesheet" type="text/css" href="~/vendor/fonts/roboto/css.css">
+    <link asp-append-version="true" rel="stylesheet" type="text/css" href="~/vendor/nucleo/css/nucleo.css">
+    <link asp-append-version="true" rel="stylesheet" type="text/css" href="~/vendor/fontawesome/css/all.min.css">
+    <link asp-append-version="true" rel="stylesheet" type="text/css" href="~/vendor/jquery-confirm/css/jquery-confirm.css" />
+
+    @RenderSection("Css", required: false)
+
+    <link asp-append-version="true" rel="stylesheet" type="text/css" href="~/vendor/animate.css/animate.min.css">
+    <link asp-append-version="true" rel="stylesheet" type="text/css" href="~/css/main.css">
+    <link asp-append-version="true" rel="stylesheet" type="text/css" href="~/css/light.css">
+    <link asp-append-version="true" rel="stylesheet" type="text/css" href="~/css/style.css">
+
+    @RenderSection("Sole", required: false)
+
+</head>
+<body class="g-sidenav-pinned active-sidebar something2">
+
+    <partial name="_Navigation" />
+
+    <div class="main-content" id="panel">
+
+        <partial name="_CookieConsentPartial" />
+
+        <main role="main" class="pb-3">
+
+            <partial name="_TopNavigation" />
+
+            @RenderBody()
+
+            <partial name="_Footer" />
+
+        </main>
+    </div>
+
+    <script asp-append-version="true" type="text/javascript" src="~/vendor/jquery/dist/jquery.min.js"></script>
+    <script asp-append-version="true" type="text/javascript" src="~/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script asp-append-version="true" type="text/javascript" src="~/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script asp-append-version="true" type="text/javascript" src="~/vendor/js-cookie/js.cookie.js"></script>
+
+    <script asp-append-version="true" type="text/javascript" src="~/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+    <script asp-append-version="true" type="text/javascript" src="~/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+    <script asp-append-version="true" type="text/javascript" src="~/vendor/jquery-confirm/js/jquery-confirm.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+    <script asp-append-version="true" type="text/javascript" src="~/js/app.min.js"></script>
+
+    <script asp-append-version="true" type="text/javascript">
+        $(function () {
+            var url = window.location;
+
+            //start
+
+            $('.nav_level0 a.nav-link').filter(function () {
+                return this.href == url;
+            }).parent().addClass('nav-color-active');
+
+            $('.nav_level1 ul li a.nav-link').filter(function () {
+                return this.href == url;
+            }).addClass('active').parent().parent().parent().addClass('show').parent().addClass('nav-color-active');
+
+            $('.nav_level2 ul li a.nav-link').filter(function () {
+                return this.href == url;
+            }).addClass('active').parent().parent().parent().addClass('show').parent().removeClass('nav-color-active').parent().parent().addClass('show').parent().addClass('nav-color-active');
+
+            $('.nav_level2_all ul li ul li a.nav-link').filter(function () {
+                return this.href == url;
+            }).addClass('active').parent().parent().parent().addClass('show').parent().addClass('arrow-x').parent().parent().addClass('show').parent().addClass('nav-color-active');
+
+            //Finished
+
+            $(document).on('click', '.sidenav-toggler', function () {
+                if (innerWidth > 1199) {
+                    $('body.deactive-sidebar').removeClass('g-sidebar-hidden').toggleClass('g-sidenav-pinned')
+                    $('body.active-sidebar').addClass('g-sidenav-show')
+                }
+            });
+
+            //$("#sidenav-main").hover(function () {
+            //    $('body.active-sidebar').addClass('g-sidenav-show').removeClass('g-sidebar-hidden')
+            //}, function () {
+            //    $('body.active-sidebar').removeClass('g-sidenav-show')
+            //});
+
+            $(document).ready(function () {
+                if (innerWidth < 900) {
+                    $('body.active-sidebar').removeClass('g-sidenav-pinned').addClass('g-sidenav-hidden')
+                }
+            });
+
+            $(document).on('click', '.reload-btn', function () {
+                location.reload();
+            });
+
+            $('.logout-confirm').confirm({
+                icon: 'fa fa-power-off',
+                title: 'Logout?',
+                theme: 'modern',
+                animation: 'zoom',
+                closeAnimation: 'zoom',
+                backgroundDismiss: true,
+                closeIcon: true,
+                type: 'blue',
+                buttons: {
+
+                    Yes: {
+                        text: 'yes',
+                        btnClass: 'btn-primary',
+                        action: function () {
+                            location.href = this.$target.attr('href');
+                        },
+                    },
+                    no: {
+                        text: 'no',
+                        action: function () {
+                            //
+                        }
+                    }
+                }
+
+            });
+        });
+
+        $("#searchText").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#sidenav-main ul li").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+    </script>
+</body>
+</html>

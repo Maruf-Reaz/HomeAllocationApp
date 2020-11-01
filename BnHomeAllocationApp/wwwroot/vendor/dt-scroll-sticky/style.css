@@ -1,0 +1,155 @@
+
+.container {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    height: 80%;
+    width: 60%;
+    background-color: #f0f0f0;
+    border: 1px solid blue;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.dataTables_wrapper {
+    width: 100%;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+table.dataTable {
+    background-color: #fff;
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+    table.dataTable thead,
+    table.dataTable tfoot {
+        background-color: #f5f5f5;
+    }
+
+        table.dataTable thead th,
+        table.dataTable tfoot th {
+            font-weight: bold;
+            border-bottom: 1px solid #111111;
+        }
+
+            table.dataTable thead th:active,
+            table.dataTable thead td:active {
+                outline: none;
+            }
+
+    table.dataTable tr.even,
+    table.dataTable tr.alt,
+    table.dataTable tr:nth-of-type(even) {
+        background: #F9F9F9;
+    }
+
+    table.dataTable th,
+    table.dataTable td {
+        padding: 1rem;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    table.dataTable tfoot th,
+    table.dataTable tfoot td {
+        border-top: 1px solid #111111;
+    }
+
+    table.dataTable tbody > tr:hover {
+        background-color: lightblue;
+    }
+
+    table.dataTable,
+    table.dataTable th,
+    table.dataTable td {
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+
+.dataTables_wrapper .dataTables_scroll {
+    clear: both;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    border: 1px solid #ccc;
+    margin: 1.5rem 0;
+}
+
+    .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
+        -webkit-flex: 1 0 0px;
+        -ms-flex: 1 0 0px;
+        flex: 1 0 0px;
+        margin-top: -1px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+.dataTables_scrollHeadInner {
+    flex: 1 1 auto;
+}
+
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody th > div.dataTables_sizing,
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody td > div.dataTables_sizing {
+    height: 0;
+    overflow: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.dataTables_wrapper:after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    clear: both;
+    height: 0;
+}
+
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting {
+    cursor: pointer;
+}
+
+table.dataTable thead .sorting {
+    background: url("../img/datatables/sort_both.png") no-repeat center right;
+}
+
+table.dataTable thead .sorting_asc {
+    background: url("../img/datatables/sort_asc.png") no-repeat center right;
+}
+
+table.dataTable thead .sorting_desc {
+    background: url("../img/datatables/sort_desc.png") no-repeat center right;
+}
+
+table.dataTable thead .sorting_asc_disabled {
+    background: url("../img/datatables/sort_asc_disabled.png") no-repeat center right;
+}
+
+table.dataTable thead .sorting_desc_disabled {
+    background: url("../img/datatables/sort_desc_disabled.png") no-repeat center right;
+}

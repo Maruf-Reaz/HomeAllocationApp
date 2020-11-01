@@ -1,0 +1,177 @@
+﻿@model BnHomeAllocationApp.Models.OfficerResidenceInfo
+
+@{
+    ViewData["Title"] = "Apply For Change";
+}
+
+@section Css {
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/select2/dist/css/select2.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/fonts/roboto-condensed/css.css">
+}
+
+@section Sole {
+    <style>
+        .card-body .input-group-text {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da !important;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #525f7f;
+            width: 160px;
+        }
+
+        .custom-file-label::after {
+            background-color: #e9ecef;
+            border-color: #ced4da !important;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #525f7f;
+        }
+
+        .select2.select2-container {
+            width: calc(100% - 160px) !important;
+        }
+    </style>
+}
+
+<div class="header bg-custom pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 d-inline-block mb-0">Create</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a asp-action="Index">Apply For Change</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a class="btn btn-sm btn-neutral" asp-action="AllottementState">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="card mb-4 animated fadeIn">
+        <div class="card-header">
+            <h3 class="mb-0">Add Apply For Change</h3>
+        </div>
+        <div class="card-body">
+            <form asp-action="ApplyForChange">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Residence Zone :</div>
+                            </div>
+                            <input asp-for="Id" id="id" hidden class="form-control" />
+                            <input asp-for="ResidenceId" id="residenceId" hidden class="form-control" />
+                            <input asp-for="ApplicationTypeId" hidden class="form-control" value="1" />
+                            <select data-toggle="select" id="rankId" class="form-control" asp-items="@ViewBag.Ranks">
+                                <option selected>--Select--</option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Officer :</div>
+                            </div>
+                            <select data-toggle="select" asp-for="OfficerId" id="officerId" class="form-control">
+                                <option selected>--Select--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="control-label">Application Date</label>
+                        <input asp-for="ApplicationDate" class="form-control datepicker mb-2" />
+                        <span asp-validation-for="ApplicationDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-12">
+                        <label class="control-label">Reason :</label>
+                        <textarea asp-for="Reason" class="form-control mb-2" rows="4"></textarea>
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-12">
+                        <label class="control-label">Preference :</label>
+                        <textarea asp-for="Preference" class="form-control mb-2" rows="4"></textarea>
+                        <span asp-validation-for="Preference" class="text-danger"></span>
+                    </div>
+                    <div class="col-lg-12">
+                        <label class="control-label">Remarks :</label>
+                        <textarea asp-for="Remarks" class="form-control mb-2" rows="4"></textarea>
+                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="submit" value="Allote" class="btn btn-primary mt-3" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script asp-append-version="true" src="~/vendor/select2/dist/js/select2.min.js"></script>
+    <script asp-append-version="true" src="~/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+              $("#rankId").on('change', function () {
+                  var rankId = $("#rankId").val();
+                $('#officerId').empty();
+                var url1 = '@Url.Action("GetAllottedOfficers", "OfficerResidenceInfoes")';
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: url1,
+                    data: {
+                        id: rankId,
+                    },
+                    cache: false,
+
+                    success: function (result) {
+                        $('#officerId').append('<option selected value="0">Select</option>');
+                        $.each(result, function (index, object) {
+
+                            $('#officerId').append('<option value="' + object.officer.id + '">' + object.officer.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+            $("#officerId").on('change', function () {
+                var officerId = $("#officerId").val();
+
+
+
+                var url1 = '@Url.Action("GetAllottedOfficerById", "OfficerResidenceInfoes")';
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: url1,
+                    data: {
+                        id: officerId,
+                    },
+                    cache: false,
+
+                    success: function (result) {
+
+                        $("#id").val(result.id);
+                        $("#residenceId").val(result.residenceId);
+
+
+                    }
+                });
+            });
+
+
+        });
+
+    </script>
+}

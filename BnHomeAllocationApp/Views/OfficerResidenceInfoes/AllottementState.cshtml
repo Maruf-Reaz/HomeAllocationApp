@@ -1,0 +1,197 @@
+﻿@model IEnumerable<BnHomeAllocationApp.Models.OfficerResidenceInfo>
+
+@{
+    ViewData["Title"] = "Allotte State";
+}
+
+@section Css {
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
+}
+
+@section Sole {
+    @*<link href="~/css/datatable-table-responsive.css" rel="stylesheet" />*@
+    <style>
+
+        .table td, .table th {
+            padding: .7rem;
+        }
+
+        table[id*="DataTables_Table_"] {
+            overflow-x: auto;
+        }
+    </style>
+}
+<div class="header bg-custom pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 d-inline-block mb-0">Allottement State</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Officer Residence Info</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Allottement State</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a class="btn btn-sm btn-neutral" asp-action="GeneralAllotte">New</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+
+            @foreach (var item in ViewBag.Ranks)
+            {
+                <div class="card animated fadeIn">
+                    <div class="card-header">
+                        <h3 class="mb-0">@item.Name</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="py-4">
+                            <table class="table align-items-center table-hover table-striped table-bordered" data-toggle="datatable3">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>
+                                            S/L
+                                        </th>
+                                        <th>
+                                            P No
+                                        </th>
+                                        <th>
+                                            Rank & Name
+                                        </th>
+
+                                        <th>
+                                            Residence
+                                        </th>
+                                        <th>
+                                            Work Place
+                                        </th>
+                                        <th>
+                                            Remarks
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                                        int serial = 0;
+                                    }
+
+                                    @foreach (var officerInfo in ViewBag.OfficerResidenceInfo)
+                                    {
+
+                                        @if (officerInfo.Officer.OfficerRankId == item.Id)
+                                        {
+                                            serial++;
+
+                                            <tr>
+                                                <td>@serial</td>
+                                                <td>
+                                                    @officerInfo.Officer.PNO
+                                                </td>
+                                                <td>
+                                                    @officerInfo.Officer.OfficerRank.Name  @officerInfo.Officer.Name
+                                                </td>
+                                                <td>
+                                                    @officerInfo.Residence.Name
+                                                </td>
+                                                <td>
+                                                    @officerInfo.Officer.CurrentWorkPlace
+                                                </td>
+                                                <td class="text-wrap">
+                                                    @officerInfo.Remarks
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6"> Total @item.Name (s) = @serial </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="~/vendor/datatables.net/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/datatables.net-buttons/js/dataTables.buttons.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/datatables.net-buttons/js/buttons.html5.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/datatables.net-buttons/js/buttons.flash.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/datatables.net-buttons/js/buttons.print.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/datatables.net-select/js/dataTables.select.min.js" asp-append-version="true"></script>
+    <script>
+        var e = $('[data-toggle="datatable3"]');
+        e.length && e.on("init.dt", function () {
+            $("div.dataTables_length select").removeClass("custom-select custom-select-sm");
+            $(".dt-buttons .btn.buttons-copy").removeClass("btn-secondary").addClass("btn-sm btn-primary");
+            $(".dt-buttons .btn.buttons-csv").removeClass("btn-secondary").addClass("btn-sm btn-default");
+            $(".dt-buttons .btn.buttons-print").removeClass("btn-secondary").addClass("btn-sm btn-default")
+        }).DataTable({
+            dom: "<'row before-table-responsive'<'col-sm-12 col-md-6'B<'d-inline-flex'l>><'col-sm-12 col-md-6'f>>" +
+                "<'row'<'col-md-6'><'col-md-6'>>" +
+                "<'row'<'col-md-12't>><'row after-table-responsive'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+            keys: !0,
+            responsive: true,
+            order: [],
+            language: {
+                paginate: {
+                    previous: "<i class='fas fa-angle-left'>",
+                    next: "<i class='fas fa-angle-right'>",
+                }
+            },
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            autoWidth: false,
+            columnDefs: [
+                { "searchable": false, "targets": [-1,] },
+                { "orderable": false, "targets": [-1,] },
+            ],
+            buttons: [
+                'excel', 'pdf',
+                {
+                    extend: 'copy',
+                    title: '',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)'
+                    }
+
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)'
+                    }
+
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)'
+                    }
+
+                }
+            ],
+        })
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
